@@ -6,7 +6,7 @@ class Carte {
     }
 
     boolean esteCarteIdentica(Carte c) {
-        return numarPagini == c.numarPagini;
+        return numarPagini.eqals(c.numarPagini);
     }
 
     public static void main(String[] args) {
