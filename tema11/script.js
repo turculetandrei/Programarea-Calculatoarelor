@@ -1,11 +1,13 @@
 let culoare1 = 'red';
 let culoare2 = 'blue';
-let schimbare = false;
-let ultimulTimp = 0;
+let activ = false;
+let intervalID;
 
 function setup() {
-  createCanvas(220, 100);
+  createCanvas(240, 140);
   rectMode(CORNER);
+  textAlign(CENTER, CENTER);
+  textSize(16);
 }
 
 function draw() {
@@ -15,21 +17,37 @@ function draw() {
   rect(10, 25, 100, 50);
 
   fill(culoare2);
-  rect(110, 25, 100, 50);
+  rect(130, 25, 100, 50);
 
-  if (schimbare && millis() - ultimulTimp >= 1000) {
-    let aux = culoare1;
-    culoare1 = culoare2;
-    culoare2 = aux;
-    ultimulTimp = millis();
+  fill(0, 200, 0);
+  rect(30, 100, 80, 30, 5);
+  fill(0);
+  text("START", 70, 115);
+
+  fill(200, 0, 0);
+  rect(130, 100, 80, 30, 5);
+  fill(255);
+  text("STOP", 170, 115);
+}
+
+function mousePressed() {
+  if (mouseX > 30 && mouseX < 110 && mouseY > 100 && mouseY < 130) {
+    if (!activ) {
+      activ = true;
+      intervalID = setInterval(schimba, 1000);
+    }
+  }
+
+  if (mouseX > 130 && mouseX < 210 && mouseY > 100 && mouseY < 130) {
+    if (activ) {
+      clearInterval(intervalID);
+      activ = false;
+    }
   }
 }
 
-function keyPressed() {
-  if (key === 's' || key === 'S') {
-    schimbare = true;
-    ultimulTimp = millis();
-  } else if (key === 'x' || key === 'X') {
-    schimbare = false;
-  }
+function schimba() {
+  let aux = culoare1;
+  culoare1 = culoare2;
+  culoare2 = aux;
 }
