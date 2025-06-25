@@ -23,7 +23,7 @@ public class Firma {
         for (Angajat a : angajati) {
             total += a.calculSalar();
         }
-        return total / angajati.size();
+        return total /  angajati.size();
     }
     
 
